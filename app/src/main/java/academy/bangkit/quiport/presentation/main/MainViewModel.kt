@@ -1,4 +1,4 @@
-package academy.bangkit.quiport.presentation
+package academy.bangkit.quiport.presentation.main
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.asLiveData

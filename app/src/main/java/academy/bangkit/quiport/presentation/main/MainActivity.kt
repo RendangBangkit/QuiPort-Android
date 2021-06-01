@@ -1,4 +1,4 @@
-package academy.bangkit.quiport.presentation
+package academy.bangkit.quiport.presentation.main
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle

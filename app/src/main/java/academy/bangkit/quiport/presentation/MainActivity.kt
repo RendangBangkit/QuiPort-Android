@@ -1,17 +1,17 @@
 package academy.bangkit.quiport.presentation
 
-import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Toast
-import com.google.android.play.core.splitinstall.SplitInstallManagerFactory
-import com.google.android.play.core.splitinstall.SplitInstallRequest
 import academy.bangkit.quiport.core.data.Resource
 import academy.bangkit.quiport.databinding.ActivityMainBinding
+import academy.bangkit.quiport.features.ExtraFeatures
+import org.koin.android.ext.android.inject
 import org.koin.android.viewmodel.ext.android.viewModel
 
 class MainActivity : AppCompatActivity() {
     private val viewModel: MainViewModel by viewModel()
+    private val extraFeatures: ExtraFeatures by inject()
     private lateinit var binding: ActivityMainBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -32,35 +32,12 @@ class MainActivity : AppCompatActivity() {
 
         binding.btnExtra.setOnClickListener {
             try {
-                installExtraModule()
+                startActivity(extraFeatures.getIntent())
             } catch (e: Exception){
-                Toast.makeText(this, "Module not found", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this, "Module not installed. Trying to install module.", Toast.LENGTH_SHORT).show()
+
+                extraFeatures.installModule()
             }
         }
-    }
-
-    private fun installExtraModule() {
-        val splitInstallManager = SplitInstallManagerFactory.create(this)
-        val moduleExtra = "extra"
-        if (splitInstallManager.installedModules.contains(moduleExtra)) {
-            moveToExtraActivity()
-            Toast.makeText(this, "Open module", Toast.LENGTH_SHORT).show()
-        } else {
-            val request = SplitInstallRequest.newBuilder()
-                .addModule(moduleExtra)
-                .build()
-            splitInstallManager.startInstall(request)
-                .addOnSuccessListener {
-                    Toast.makeText(this, "Success installing module", Toast.LENGTH_SHORT).show()
-                    moveToExtraActivity()
-                }
-                .addOnFailureListener {
-                    Toast.makeText(this, "Error installing module", Toast.LENGTH_SHORT).show()
-                }
-        }
-    }
-
-    private fun moveToExtraActivity() {
-        startActivity(Intent(this, Class.forName("id.practice.mynews.extra.ExtraActivity")))
     }
 }

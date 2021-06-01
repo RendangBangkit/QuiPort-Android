@@ -4,6 +4,7 @@ import android.app.Application
 import academy.bangkit.quiport.core.di.databaseModule
 import academy.bangkit.quiport.core.di.networkModule
 import academy.bangkit.quiport.core.di.repositoryModule
+import academy.bangkit.quiport.di.featureModule
 import academy.bangkit.quiport.di.useCaseModule
 import academy.bangkit.quiport.di.viewModelModule
 import academy.bangkit.quiport.utils.ReleaseTree
@@ -29,6 +30,7 @@ class MyApplication : Application() {
             modules(
                 listOf(
                     databaseModule,
+                    featureModule,
                     networkModule,
                     repositoryModule,
                     useCaseModule,

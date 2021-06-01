@@ -1,4 +1,4 @@
 include ':extra'
 include ':core'
 include ':app'
-rootProject.name = "MyNews"
+rootProject.name = "QuiPort-Android"

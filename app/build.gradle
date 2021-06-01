@@ -15,7 +15,7 @@ android {
     }
 
     defaultConfig {
-        applicationId "id.practice.mynews"
+        applicationId "academy.bangkit.quiport"
         minSdkVersion 21
         targetSdkVersion 30
         versionCode 1

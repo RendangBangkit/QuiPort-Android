@@ -2,6 +2,8 @@ plugins {
     id 'com.android.application'
     id 'kotlin-android'
     id 'kotlin-kapt'
+    id 'com.google.gms.google-services'
+    id 'com.google.firebase.crashlytics'
 }
 
 apply from: '../shared.gradle'
@@ -44,6 +46,9 @@ dependencies {
     implementation project(":core")
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
+
+    implementation 'com.google.firebase:firebase-analytics-ktx:19.0.0'
+    implementation 'com.google.firebase:firebase-crashlytics:18.0.0'
 
     implementation "com.google.android.play:core:$play_core_version"
 }

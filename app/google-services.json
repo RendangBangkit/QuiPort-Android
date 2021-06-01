@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "769268373725",
+    "firebase_url": "https://quiport-default-rtdb.firebaseio.com",
+    "project_id": "quiport",
+    "storage_bucket": "quiport.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:769268373725:android:8c238a9d5f8545da2b6334",
+        "android_client_info": {
+          "package_name": "academy.bangkit.quiport"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "769268373725-244gc1nv5d66lsgc04r6qrmqqe1hb8g9.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCij7W8KdWkzc6b0fvsV9QddD9N3AXgEKo"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "769268373725-244gc1nv5d66lsgc04r6qrmqqe1hb8g9.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

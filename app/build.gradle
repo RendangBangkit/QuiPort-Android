@@ -50,5 +50,7 @@ dependencies {
     implementation 'com.google.firebase:firebase-analytics-ktx:19.0.0'
     implementation 'com.google.firebase:firebase-crashlytics:18.0.0'
 
+    implementation "com.jakewharton.timber:timber:4.7.1"
+
     implementation "com.google.android.play:core:$play_core_version"
 }

@@ -6,6 +6,7 @@ import android.widget.Toast
 import academy.bangkit.quiport.core.data.Resource
 import academy.bangkit.quiport.databinding.ActivityMainBinding
 import academy.bangkit.quiport.features.ExtraFeatures
+import es.dmoral.toasty.Toasty
 import org.koin.android.ext.android.inject
 import org.koin.android.viewmodel.ext.android.viewModel
 
@@ -34,7 +35,7 @@ class MainActivity : AppCompatActivity() {
             try {
                 startActivity(extraFeatures.getIntent())
             } catch (e: Exception){
-                Toast.makeText(this, "Module not installed. Trying to install module.", Toast.LENGTH_SHORT).show()
+                Toasty.error(this, "Module not installed. Trying to install module.", Toast.LENGTH_SHORT).show()
 
                 extraFeatures.installModule()
             }

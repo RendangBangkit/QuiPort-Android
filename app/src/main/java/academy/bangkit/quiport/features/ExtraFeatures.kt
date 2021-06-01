@@ -5,6 +5,7 @@ import android.content.Intent
 import android.widget.Toast
 import com.google.android.play.core.splitinstall.SplitInstallManagerFactory
 import com.google.android.play.core.splitinstall.SplitInstallRequest
+import es.dmoral.toasty.Toasty
 
 class ExtraFeatures(private val context: Context) {
     companion object {
@@ -16,7 +17,7 @@ class ExtraFeatures(private val context: Context) {
         val moduleExtra = "extra"
 
         if (splitInstallManager.installedModules.contains(moduleExtra)) {
-            Toast.makeText(context, "Module has been installed.", Toast.LENGTH_SHORT).show()
+            Toasty.success(context, "Module has been installed.", Toast.LENGTH_SHORT).show()
         } else {
             val request = SplitInstallRequest.newBuilder()
                 .addModule(moduleExtra)
@@ -24,10 +25,10 @@ class ExtraFeatures(private val context: Context) {
 
             splitInstallManager.startInstall(request)
                 .addOnSuccessListener {
-                    Toast.makeText(context, "Success installing module.", Toast.LENGTH_SHORT).show()
+                    Toasty.success(context, "Success installing module.", Toast.LENGTH_SHORT).show()
                 }
                 .addOnFailureListener {
-                    Toast.makeText(context, "Error installing module.", Toast.LENGTH_SHORT).show()
+                    Toasty.error(context, "Error installing module.", Toast.LENGTH_SHORT).show()
                 }
         }
     }

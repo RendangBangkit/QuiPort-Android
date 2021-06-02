@@ -1,4 +1,4 @@
-package academy.bangkit.quiport.core.data.source.remote.response
+package academy.bangkit.quiport.core.data.source.remote.response.message
 
 import com.google.gson.annotations.SerializedName
 
@@ -10,4 +10,4 @@ data class ListMessageResponse(
     @field:SerializedName("result")
     val result: List<MessageResponse>,
 
-)
+    )

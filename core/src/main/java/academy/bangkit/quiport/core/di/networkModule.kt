@@ -1,15 +1,9 @@
 package academy.bangkit.quiport.core.di
 
-import academy.bangkit.quiport.core.BuildConfig
 import academy.bangkit.quiport.core.BuildConfig.BASE_URL
 import academy.bangkit.quiport.core.data.source.remote.network.ApiService
-import com.google.gson.FieldNamingPolicy
-import com.google.gson.Gson
-import com.google.gson.GsonBuilder
 import okhttp3.CertificatePinner
-import okhttp3.HttpUrl
 import okhttp3.OkHttpClient
-import okhttp3.Request
 import okhttp3.logging.HttpLoggingInterceptor
 import org.koin.dsl.module
 import retrofit2.Retrofit

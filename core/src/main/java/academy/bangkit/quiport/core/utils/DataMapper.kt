@@ -1,8 +1,8 @@
 package academy.bangkit.quiport.core.utils
 
 import academy.bangkit.quiport.core.data.source.local.entity.MessageEntity
-import academy.bangkit.quiport.core.data.source.remote.response.MessageResponse
-import academy.bangkit.quiport.core.domain.model.Message
+import academy.bangkit.quiport.core.data.source.remote.response.message.MessageResponse
+import academy.bangkit.quiport.core.domain.model.message.Message
 
 object DataMapper {
     fun mapResponsesToEntities(input: List<MessageResponse>): List<MessageEntity> {

@@ -1,4 +1,4 @@
-package academy.bangkit.quiport.core.domain.model
+package academy.bangkit.quiport.core.domain.model.message
 
 data class Message(
     var messageId: String,

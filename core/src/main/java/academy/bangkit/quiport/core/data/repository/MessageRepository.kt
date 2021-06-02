@@ -1,10 +1,12 @@
-package academy.bangkit.quiport.core.data
+package academy.bangkit.quiport.core.data.repository
 
+import academy.bangkit.quiport.core.data.NetworkBoundResource
+import academy.bangkit.quiport.core.data.Resource
 import academy.bangkit.quiport.core.data.source.local.LocalDataSource
 import academy.bangkit.quiport.core.data.source.remote.RemoteDataSource
 import academy.bangkit.quiport.core.data.source.remote.network.ApiResponse
-import academy.bangkit.quiport.core.data.source.remote.response.MessageResponse
-import academy.bangkit.quiport.core.domain.model.Message
+import academy.bangkit.quiport.core.data.source.remote.response.message.MessageResponse
+import academy.bangkit.quiport.core.domain.model.message.Message
 import academy.bangkit.quiport.core.domain.repository.IMessageRepository
 import academy.bangkit.quiport.core.utils.AppExecutors
 import academy.bangkit.quiport.core.utils.DataMapper

@@ -1,4 +1,4 @@
-package academy.bangkit.quiport.presentation.main
+package academy.bangkit.quiport.presentation.message
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -10,8 +10,8 @@ import es.dmoral.toasty.Toasty
 import org.koin.android.ext.android.inject
 import org.koin.android.viewmodel.ext.android.viewModel
 
-class MainActivity : AppCompatActivity() {
-    private val viewModel: MainViewModel by viewModel()
+class MessageActivity : AppCompatActivity() {
+    private val viewModel: MessageViewModel by viewModel()
     private val extraFeatures: ExtraFeatures by inject()
     private lateinit var binding: ActivityMainBinding
 

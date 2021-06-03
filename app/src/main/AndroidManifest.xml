@@ -20,7 +20,7 @@
             </intent-filter>
         </activity>
         <activity android:name=".presentation.report.ReportActivity" />
-        <activity android:name=".presentation.main.MainActivity" />
+        <activity android:name=".presentation.message.MessageActivity" />
     </application>
 
 </manifest>

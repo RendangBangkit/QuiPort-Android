@@ -15,4 +15,5 @@
     <string name="template_empty_message">Please Try Again!\n\n%1$s</string>
     <string name="template_oops_title">Oops..</string>
     <string name="template_oops_message">Network failure, Please Try Again!\n\n%1$s</string>
+    <string name="double_press_notification">Please click back once again to exit</string>
 </resources>

@@ -8,15 +8,23 @@ import academy.bangkit.quiport.databinding.ActivityReportBinding
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.DefaultItemAnimator
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.google.android.material.snackbar.Snackbar
 import org.koin.android.viewmodel.ext.android.viewModel
 
 class ReportActivity : AppCompatActivity() {
     private lateinit var binding: ActivityReportBinding
     private val viewModel: ReportViewModel by viewModel()
+    private var doubleBackToExitPressedOnce = false
+
+    companion object {
+        private const val DOUBLE_TAP_DELAY = 2000L
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -75,6 +83,20 @@ class ReportActivity : AppCompatActivity() {
                 }
             }
         })
+    }
+
+    override fun onBackPressed() {
+        if (doubleBackToExitPressedOnce) {
+            finishAffinity()
+            return
+        }
+
+        this.doubleBackToExitPressedOnce = true
+        Snackbar.make(binding.root, resources.getString(R.string.double_press_notification), Snackbar.LENGTH_SHORT).show()
+
+        Handler(Looper.getMainLooper()).postDelayed( {
+            doubleBackToExitPressedOnce = false
+        }, DOUBLE_TAP_DELAY)
     }
 
     private fun showErrorMessage(imageView: Int, title: String, message: String) {

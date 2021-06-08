@@ -16,16 +16,16 @@ val networkModule = module {
         val hostname = URI(BASE_URL).host
 
         val certificatePinner = CertificatePinner.Builder()
-            .add(hostname, "sha256/0vhur4rv1XMbO/Bzg7SUicSLyTsOoBfhpdTyK3yifDQ==")
-            .add(hostname, "sha256/rUCrPVDhSTsRzNk3Kd31x/AJ1FxCyuKlGooIEk9epy8=")
-            .add(hostname, "sha256/PJepcSEhCduoNGbeFk/D8M63d1+xi002VfGxM1uK6s8=")
+            .add(hostname, "sha256/YoQdQpwmIBIHYzV/7rnIFn0CHyITfqkZ53w1hFRARDQ=")
+            .add(hostname, "sha256/YZPgTZ+woNCCCIW3LH2CxQeLzB/1m42QcCTBSdgayjs=")
+            .add(hostname, "sha256/iie1VXtL7HzAMF+/PVPR9xzT80kQxdZeJ+zduCB3uj0=")
             .build()
 
         OkHttpClient.Builder()
             .addInterceptor(HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.BODY))
             .connectTimeout(240, TimeUnit.SECONDS)
             .readTimeout(240, TimeUnit.SECONDS)
-//            .certificatePinner(certificatePinner)
+            .certificatePinner(certificatePinner)
             .build()
     }
     single {

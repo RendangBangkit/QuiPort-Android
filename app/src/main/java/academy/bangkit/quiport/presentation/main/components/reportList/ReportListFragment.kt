@@ -1,40 +1,43 @@
-package academy.bangkit.quiport.presentation.report
+package academy.bangkit.quiport.presentation.main.components.reportList
 
 import academy.bangkit.quiport.R
 import academy.bangkit.quiport.core.adapter.ReportAdapter
 import academy.bangkit.quiport.core.data.Resource
 import academy.bangkit.quiport.core.utils.Tools
-import academy.bangkit.quiport.databinding.ActivityReportBinding
+import android.os.Bundle
+import androidx.fragment.app.Fragment
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
+import academy.bangkit.quiport.databinding.FragmentReportListBinding
 import android.content.Intent
 import android.net.Uri
-import android.os.Bundle
-import android.os.Handler
-import android.os.Looper
-import android.view.View
-import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.DefaultItemAnimator
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.google.android.material.snackbar.Snackbar
 import org.koin.android.viewmodel.ext.android.viewModel
 
-class ReportActivity : AppCompatActivity() {
-    private lateinit var binding: ActivityReportBinding
-    private val viewModel: ReportViewModel by viewModel()
-    private var doubleBackToExitPressedOnce = false
+class ReportListFragment : Fragment() {
+    private var _binding : FragmentReportListBinding? = null
+    private val binding get() = _binding as FragmentReportListBinding
+    private val reportListViewModel: ReportListViewModel by viewModel()
 
-    companion object {
-        private const val DOUBLE_TAP_DELAY = 2000L
+    override fun onCreateView(
+        inflater: LayoutInflater, container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View {
+        _binding = FragmentReportListBinding.inflate(inflater, container, false)
+
+        return binding.root
     }
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-
-        binding = ActivityReportBinding.inflate(layoutInflater)
-        setContentView(binding.root)
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
 
         val reportAdapter = ReportAdapter()
         reportAdapter.onItemClick = {
-            val browserIntent = Intent(Intent.ACTION_VIEW, Uri.parse(Tools.generateMapsLink(
+            val browserIntent = Intent(
+                Intent.ACTION_VIEW, Uri.parse(
+                    Tools.generateMapsLink(
                 it.addressComponents.latitude,
                 it.addressComponents.longitude
             )))
@@ -43,7 +46,7 @@ class ReportActivity : AppCompatActivity() {
         }
 
         binding.swipeRefreshLayout.setOnRefreshListener {
-            binding.swipeRefreshLayout.isRefreshing = false
+            reportListViewModel.refresh()
         }
 
         with(binding.recyclerView) {
@@ -53,7 +56,7 @@ class ReportActivity : AppCompatActivity() {
             itemAnimator = DefaultItemAnimator()
         }
 
-        viewModel.report.observe(this, {
+        reportListViewModel.report.observe(requireActivity(), {
             if (it != null) {
                 when (it) {
                     is Resource.Loading -> {
@@ -85,18 +88,9 @@ class ReportActivity : AppCompatActivity() {
         })
     }
 
-    override fun onBackPressed() {
-        if (doubleBackToExitPressedOnce) {
-            finishAffinity()
-            return
-        }
-
-        this.doubleBackToExitPressedOnce = true
-        Snackbar.make(binding.root, resources.getString(R.string.double_press_notification), Snackbar.LENGTH_SHORT).show()
-
-        Handler(Looper.getMainLooper()).postDelayed( {
-            doubleBackToExitPressedOnce = false
-        }, DOUBLE_TAP_DELAY)
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
     }
 
     private fun showErrorMessage(imageView: Int, title: String, message: String) {

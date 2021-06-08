@@ -1,4 +1,4 @@
-package academy.bangkit.quiport.features
+package academy.bangkit.quiport.core.features
 
 import android.content.Context
 import android.content.Intent

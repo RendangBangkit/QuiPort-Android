@@ -9,6 +9,7 @@ import academy.bangkit.quiport.core.domain.repository.IReportRepository
 import academy.bangkit.quiport.core.utils.AppExecutors
 import academy.bangkit.quiport.core.utils.toListReport
 import kotlinx.coroutines.flow.*
+import java.io.File
 
 class ReportRepository(
     private val remoteDataSource: RemoteDataSource,
@@ -31,6 +32,35 @@ class ReportRepository(
             is ApiResponse.Error -> {
                 emit(
                     Resource.Error<List<Report>>(apiResponse.errorMessage)
+                )
+            }
+        }
+    }
+
+    override fun postReports(
+        userId: String,
+        email: String,
+        latitude: String,
+        longitude: String,
+        image: File
+    ): Flow<Resource<String>> = flow {
+        emit(Resource.Loading())
+        when (val apiResponse = remoteDataSource.postReports(
+            userId, email, latitude, longitude, image
+        ).first()) {
+            is ApiResponse.Success -> {
+                emit(
+                    Resource.Success<String>(apiResponse.data.idReport)
+                )
+            }
+            is ApiResponse.Empty -> {
+                emit(
+                    Resource.Success<String>("")
+                )
+            }
+            is ApiResponse.Error -> {
+                emit(
+                    Resource.Error<String>(apiResponse.errorMessage)
                 )
             }
         }

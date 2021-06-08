@@ -1,11 +1,11 @@
 package academy.bangkit.quiport.presentation.message
 
-import androidx.appcompat.app.AppCompatActivity
+import academy.bangkit.quiport.core.data.Resource
+import academy.bangkit.quiport.databinding.ActivityMessageBinding
+import academy.bangkit.quiport.core.features.ExtraFeatures
 import android.os.Bundle
 import android.widget.Toast
-import academy.bangkit.quiport.core.data.Resource
-import academy.bangkit.quiport.databinding.ActivityMainBinding
-import academy.bangkit.quiport.features.ExtraFeatures
+import androidx.appcompat.app.AppCompatActivity
 import es.dmoral.toasty.Toasty
 import org.koin.android.ext.android.inject
 import org.koin.android.viewmodel.ext.android.viewModel
@@ -13,12 +13,12 @@ import org.koin.android.viewmodel.ext.android.viewModel
 class MessageActivity : AppCompatActivity() {
     private val viewModel: MessageViewModel by viewModel()
     private val extraFeatures: ExtraFeatures by inject()
-    private lateinit var binding: ActivityMainBinding
+    private lateinit var binding: ActivityMessageBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        binding = ActivityMainBinding.inflate(layoutInflater)
+        binding = ActivityMessageBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
         viewModel.message.observe(this, {

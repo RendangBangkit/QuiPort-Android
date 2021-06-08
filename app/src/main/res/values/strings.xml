@@ -16,4 +16,11 @@
     <string name="template_oops_title">Oops..</string>
     <string name="template_oops_message">Network failure, Please Try Again!\n\n%1$s</string>
     <string name="double_press_notification">Please click back once again to exit</string>
+    <string name="loading">Loading</string>
+    <string name="success">Success</string>
+    <string name="error">Error</string>
+    <string name="report_home">Report Home</string>
+    <string name="report_list">Report List</string>
+    <string name="log_out">Log Out</string>
+    <string name="add_a_report">Add a Report</string>
 </resources>

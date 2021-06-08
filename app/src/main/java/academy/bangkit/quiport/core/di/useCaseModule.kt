@@ -1,4 +1,4 @@
-package academy.bangkit.quiport.di
+package academy.bangkit.quiport.core.di
 
 import academy.bangkit.quiport.core.domain.usecase.MessageInteractor
 import academy.bangkit.quiport.core.domain.usecase.MessageUseCase

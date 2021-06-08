@@ -1,11 +1,13 @@
-package academy.bangkit.quiport.presentation.profile
+package academy.bangkit.quiport.presentation.main.components.reportMain
 
-import academy.bangkit.quiport.databinding.ActivityProfileBinding
+import android.os.Bundle
+import androidx.fragment.app.Fragment
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
+import academy.bangkit.quiport.databinding.FragmentReportMainBinding
 import android.content.Intent
 import android.net.Uri
-import androidx.appcompat.app.AppCompatActivity
-import android.os.Bundle
-import android.view.View
 import com.bumptech.glide.Glide
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount
@@ -16,26 +18,31 @@ import com.google.android.gms.common.api.ApiException
 import com.google.android.gms.tasks.Task
 import timber.log.Timber
 
-class ProfileActivity : AppCompatActivity() {
-    private lateinit var binding: ActivityProfileBinding
+class ReportMainFragment : Fragment() {
     private lateinit var mGoogleSignInClient: GoogleSignInClient
+    private var _binding : FragmentReportMainBinding? = null
+    private val binding get() = _binding as FragmentReportMainBinding
 
-    companion object {
-        const val RC_SIGN_IN = 1
+    override fun onCreateView(
+        inflater: LayoutInflater, container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View {
+        _binding = FragmentReportMainBinding.inflate(inflater, container, false)
+
+        return binding.root
     }
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        binding = ActivityProfileBinding.inflate(layoutInflater)
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
 
         val gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
             .requestEmail()
             .requestProfile()
             .build()
 
-        mGoogleSignInClient = GoogleSignIn.getClient(this, gso)
+        mGoogleSignInClient = GoogleSignIn.getClient(requireActivity(), gso)
 
-        val account = GoogleSignIn.getLastSignedInAccount(this)
+        val account = GoogleSignIn.getLastSignedInAccount(requireActivity())
         updateUI(account)
 
         binding.apply {
@@ -52,8 +59,11 @@ class ProfileActivity : AppCompatActivity() {
                 signOut()
             }
         }
+    }
 
-        setContentView(binding.root)
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
@@ -87,21 +97,17 @@ class ProfileActivity : AppCompatActivity() {
         if (account != null) {
             binding.apply {
                 val personName: String? = account.displayName
-                val personGivenName: String? = account.givenName
-                val personFamilyName: String? = account.familyName
                 val personEmail: String? = account.email
                 val personId: String? = account.id
                 val personPhoto: Uri? = account.photoUrl
 
                 tvProfile.text = """
                     Name : $personName
-                    Given Name : $personGivenName
-                    Family Name : $personFamilyName
                     Email : $personEmail
                     ID : $personId
                 """.trimIndent()
 
-                Glide.with(this@ProfileActivity)
+                Glide.with(requireActivity())
                     .load(personPhoto)
                     .into(ivProfile)
 
@@ -114,21 +120,23 @@ class ProfileActivity : AppCompatActivity() {
                 btnSignIn.visibility = View.VISIBLE
             }
         }
-
-        Timber.w("signInResult:success data=%s", account?.email)
     }
 
     private fun signOut() {
         mGoogleSignInClient.signOut()
-            .addOnCompleteListener(this) {
+            .addOnCompleteListener(requireActivity()) {
                 updateUI(null)
             }
     }
 
     private fun revokeAccess() {
         mGoogleSignInClient.revokeAccess()
-            .addOnCompleteListener(this) {
+            .addOnCompleteListener(requireActivity()) {
                 updateUI(null)
             }
+    }
+
+    companion object {
+        const val RC_SIGN_IN = 1
     }
 }

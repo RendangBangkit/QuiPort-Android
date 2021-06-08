@@ -24,4 +24,5 @@
     <string name="log_out">Log Out</string>
     <string name="add_report">Add Report</string>
     <string name="not_support_camera">Device doesn\'t support camera</string>
+    <string name="double_press">Please click back once again to exit</string>
 </resources>
